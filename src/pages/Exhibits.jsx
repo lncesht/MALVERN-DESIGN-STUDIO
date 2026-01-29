@@ -60,14 +60,16 @@ const Exhibits = () => {
       <Header />
 
       <main className="flex-1 container-custom py-20">
+        <br></br>
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-display font-bold text-brown-900 mb-4">
               Exhibits
             </h1>
-            <p className="text-brown-600 text-lg">
-              A collection of contemporary art pieces
+            <p className="font-bold text-brown-600 text-lg">
+            Farewell to Arabia Exhibition
+            9th of January 2026
             </p>
           </div>
 

@@ -121,7 +121,7 @@ const Admin = () => {
             </button>
 
             <button
-              onClick={() => navigate('/admin/timeline')}
+              onClick={() => navigate('/admin/timeline-settings')}
               className="flex flex-col items-center gap-2 p-4 bg-brown-50 text-brown-700 rounded-xl hover:bg-brown-100 hover:scale-105 transition-all duration-200 border border-brown-200"
             >
               <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,7 +131,7 @@ const Admin = () => {
             </button>
 
             <button
-              onClick={() => navigate('/admin/cv')}
+              onClick={() => navigate('/admin/cv-settings')}
               className="flex flex-col items-center gap-2 p-4 bg-brown-50 text-brown-700 rounded-xl hover:bg-brown-100 hover:scale-105 transition-all duration-200 border border-brown-200"
             >
               <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">

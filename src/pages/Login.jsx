@@ -54,7 +54,7 @@ const Login = () => {
         {/* Logo/Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-display font-bold text-brown-900 mb-2">
-            Art Portfolio
+            Malvern Design Studio
           </h1>
           <p className="text-brown-600">Admin Login</p>
         </div>
@@ -113,16 +113,6 @@ const Login = () => {
               )}
             </button>
           </form>
-
-          {/* Back to Home */}
-          <div className="mt-6 text-center">
-            <button
-              onClick={() => navigate('/')}
-              className="text-brown-600 hover:text-brown-700 text-sm font-medium"
-            >
-              ← Back to Gallery
-            </button>
-          </div>
         </div>
 
         {/* Info */}

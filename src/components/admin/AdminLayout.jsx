@@ -12,7 +12,7 @@ const AdminLayout = ({ children }) => {
     try {
       await logout();
       toast.success('Logged out successfully');
-      navigate('/login');
+      navigate('/admin/login');
     } catch (error) {
       toast.error('Failed to logout');
     }
@@ -47,7 +47,7 @@ const AdminLayout = ({ children }) => {
       )
     },
     { 
-      path: '/admin/cv', 
+      path: '/admin/cv-settings', 
       label: 'Resume',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

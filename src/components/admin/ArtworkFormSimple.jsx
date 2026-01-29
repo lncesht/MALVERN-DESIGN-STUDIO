@@ -330,7 +330,6 @@ const ArtworkFormSimple = ({ artwork = null, isEdit = false }) => {
             min="1"
             max="999"
             className="w-full px-4 py-2 border border-brown-200 rounded-lg focus:ring-2 focus:ring-brown-500 focus:border-transparent"
-            placeholder="e.g., 1, 2, 3..."
           />
           <p className="mt-1 text-sm text-brown-500">
             Display order (1-15)
