@@ -154,7 +154,7 @@ const CVSettings = () => {
         <div className="mx-auto px-4 lg:px-8 xl:px-12">
           <div className="mb-6">
             <h1 className="text-3xl font-display font-bold text-brown-900">CV/Resume Settings</h1>
-            <p className="text-brown-600 mt-1">Upload your CV/Resume image for the Resume page</p>
+            <p className="text-brown-600 mt-1"></p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-8 lg:p-10 xl:p-12">
@@ -188,7 +188,6 @@ const CVSettings = () => {
                   Upload your CV as an image (JPG, PNG, WebP, GIF - Max 5MB)
                 </p>
                 <p className="mt-1 text-sm text-brown-600">
-                  This image will be displayed on the Resume page and can be downloaded as PDF
                 </p>
               </div>
 
@@ -234,10 +233,8 @@ const CVSettings = () => {
             {imageUrl && !imageFile && (
               <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                 <p className="text-sm text-green-800">
-                  <span className="font-semibold">✓ CV is configured!</span>
                 </p>
                 <p className="mt-2 text-sm text-green-700">
-                  ✓ CV image will be displayed on Resume page<br/>
                   ✓ Visitors can download as PDF
                 </p>
                 <a
