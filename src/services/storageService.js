@@ -2,23 +2,68 @@ import { supabase } from '../config/supabase';
 
 const BUCKET_NAME = 'artworks';
 
-// Upload image to Supabase Storage
+// Compress image before upload for better performance
+const compressImage = (file, maxWidth = 1920, quality = 0.8) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new Image();
+      img.src = event.target.result;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+
+        // Calculate new dimensions while maintaining aspect ratio
+        if (width > maxWidth) {
+          height = (height * maxWidth) / width;
+          width = maxWidth;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob(
+          (blob) => {
+            resolve(new File([blob], file.name, {
+              type: 'image/jpeg',
+              lastModified: Date.now(),
+            }));
+          },
+          'image/jpeg',
+          quality
+        );
+      };
+      img.onerror = reject;
+    };
+    reader.onerror = reject;
+  });
+};
+
+// Upload image to Supabase Storage with compression
 export const uploadImage = async (file, folder = 'artworks') => {
   try {
     // Get current user
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error('User not authenticated');
     
+    // Compress image before upload for better performance
+    const compressedFile = await compressImage(file);
+    
     // Create a unique filename
     const timestamp = Date.now();
-    const fileExt = file.name.split('.').pop();
+    const fileExt = 'jpg'; // Always use jpg after compression
     const filename = `${timestamp}_${Math.random().toString(36).substring(2)}.${fileExt}`;
     const filePath = `${user.id}/${filename}`;
     
-    // Upload file to Supabase Storage
+    // Upload file to Supabase Storage with cache control
     const { data, error } = await supabase.storage
       .from(BUCKET_NAME)
-      .upload(filePath, file, {
+      .upload(filePath, compressedFile, {
         cacheControl: '3600',
         upsert: false
       });

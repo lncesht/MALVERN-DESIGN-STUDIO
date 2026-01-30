@@ -33,25 +33,21 @@ const Header = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
-            <img 
-              src="/img/price_logo.png" 
-              alt="Malvern Design Studio Logo" 
-              className="w-20 h-20 lg:w-20 lg:h-20 object-contain"
-            />
-            <div className="hidden sm:block">
-              <h1 className="text-xl lg:text-2xl font-normal tracking-wide text-brown-900" style={{ fontFamily: "'Cinzel', serif", letterSpacing: '0.15em' }}>
-                <span style={{ fontSize: '1.15em' }}>M</span>
-                <span style={{ fontSize: '0.75em' }}>alvern</span>
-                <span> </span>
-                <span style={{ fontSize: '1.15em' }}>D</span>
-                <span style={{ fontSize: '0.75em' }}>esign</span>
-                <span> </span>
-                <span style={{ fontSize: '1.15em' }}>S</span>
-                <span style={{ fontSize: '0.75em' }}>tudio</span>
-              </h1>
-            </div>
-          </Link>
+          <button 
+            onClick={() => scrollToSection('hero')}
+            className="flex items-center flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+          >
+            <h1 className="text-xl lg:text-2xl font-normal tracking-wide text-brown-900" style={{ fontFamily: "'Cinzel', serif", letterSpacing: '0.15em' }}>
+              <span style={{ fontSize: '1.15em' }}>M</span>
+              <span style={{ fontSize: '0.75em' }}>alvern</span>
+              <span> </span>
+              <span style={{ fontSize: '1.15em' }}>D</span>
+              <span style={{ fontSize: '0.75em' }}>esign</span>
+              <span> </span>
+              <span style={{ fontSize: '1.15em' }}>S</span>
+              <span style={{ fontSize: '0.75em' }}>tudio</span>
+            </h1>
+          </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
@@ -80,7 +76,7 @@ const Header = () => {
               onClick={() => handleNavigation('/exhibits')}
               className="text-brown-700 hover:text-brown-900 transition-colors font-medium text-lg lg:text-xl relative group"
             >
-              Exhibits
+              9th of Jan 2026
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brown-900 group-hover:w-full transition-all duration-300"></span>
             </button>
           </nav>
@@ -134,7 +130,7 @@ const Header = () => {
                 onClick={() => handleNavigation('/exhibits')}
                 className="block w-full text-left px-4 py-2 text-brown-700 hover:text-brown-900 hover:bg-brown-50 transition-colors font-medium"
               >
-                Exhibits
+                9th of Jan 2026
               </button>
               <button
                 onClick={() => scrollToSection('contact')}

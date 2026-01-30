@@ -65,13 +65,31 @@ const ArtGallery = () => {
   
   const hasMore = filteredArtworks.length > ITEMS_PER_PAGE;
 
-  // Loading state
+  // Loading state with skeleton
   if (loading) {
     return (
-      <section id="gallery" className="min-h-screen bg-warm-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-brown-600 mx-auto"></div>
-          <p className="mt-4 text-brown-600 text-lg">Loading artworks...</p>
+      <section id="gallery" className="min-h-screen relative py-16 sm:py-20 md:py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-warm-50 to-orange-50"></div>
+        <div className="container mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 max-w-[1600px] relative z-10">
+          {/* Header Skeleton */}
+          <div className="mb-12 sm:mb-16">
+            <div className="h-12 bg-brown-200 rounded-lg w-3/4 mb-4 animate-pulse"></div>
+            <div className="h-6 bg-brown-200 rounded-lg w-1/2 animate-pulse"></div>
+          </div>
+
+          {/* Category Filter Skeleton */}
+          <div className="mb-12 flex gap-3">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="h-10 w-24 bg-brown-200 rounded-full animate-pulse"></div>
+            ))}
+          </div>
+
+          {/* Grid Skeleton */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6">
+            {[...Array(18)].map((_, i) => (
+              <div key={i} className="aspect-[3/4] bg-brown-100 rounded-xl animate-pulse"></div>
+            ))}
+          </div>
         </div>
       </section>
     );
@@ -189,6 +207,7 @@ const ArtGallery = () => {
                     alt={artwork.title}
                     className="w-full h-auto object-cover"
                     loading="lazy"
+                    decoding="async"
                   />
                   
                     

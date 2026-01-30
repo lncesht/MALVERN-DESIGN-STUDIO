@@ -40,6 +40,8 @@ const ArtworkItem = ({ artwork, onDelete }) => {
             src={artwork.imageUrl || artwork.image}
             alt={artwork.title}
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
           {/* Artwork Number Badge */}
           {artwork.artworkNumber && (

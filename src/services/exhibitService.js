@@ -1,56 +1,58 @@
-// Exhibit service for managing exhibit images
-// Currently using static assets from public/img_exhibit
-// TODO: Migrate to Supabase storage bucket 'img_exhibit' when ready
+import { supabase } from '../config/supabase';
 
-// List of exhibit images from public/img_exhibit
-const EXHIBIT_IMAGES = [
-  'DSC_0030.JPG',
-  'DSC_0031.JPG',
-  'DSC_0032.JPG',
-  'DSC_0033.JPG',
-  'DSC_0034.JPG',
-  'DSC_0035.JPG',
-  'DSC_0036.JPG',
-  'DSC_0037.JPG',
-  'DSC_0038.JPG',
-  'DSC_0039.JPG',
-  'DSC_0040.JPG',
-  'DSC_0041.JPG',
-  'DSC_0042.JPG',
-  'DSC_0043.JPG',
-  'DSC_0044.JPG',
-  'DSC_0045.JPG',
-  'DSC_0046.JPG',
-  'DSC_0048.JPG',
-  'DSC_0049.JPG',
-  'DSC_0050.JPG',
-  'DSC_0072.JPG',
-  'DSC_0073.JPG',
-  'DSC_0074.JPG',
-  'DSC_0075.JPG',
-  'DSC_0077.JPG',
-  'DSC_0079.JPG',
-  'DSC_0091.JPG',
-  'DSC_0102.JPG',
-  'DSC_0112.JPG',
-  'DSC_0144.JPG',
-  'exhibits1.JPG'
-];
+// Compress image before upload for better performance
+const compressImage = (file, maxWidth = 1920, quality = 0.8) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new Image();
+      img.src = event.target.result;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
 
-// Get all exhibit images
+        // Calculate new dimensions while maintaining aspect ratio
+        if (width > maxWidth) {
+          height = (height * maxWidth) / width;
+          width = maxWidth;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob(
+          (blob) => {
+            resolve(new File([blob], file.name, {
+              type: 'image/jpeg',
+              lastModified: Date.now(),
+            }));
+          },
+          'image/jpeg',
+          quality
+        );
+      };
+      img.onerror = reject;
+    };
+    reader.onerror = reject;
+  });
+};
+
+// Get all exhibit images from Supabase
 export const getAllExhibits = async () => {
   try {
-    // For now, return static image data
-    // TODO: Replace with Supabase storage bucket fetch when migrated
-    const exhibits = EXHIBIT_IMAGES.map((filename, index) => ({
-      id: index + 1,
-      title: `Exhibit ${index + 1}`,
-      imageUrl: `/img_exhibit/${filename}`,
-      filename: filename,
-      // Add more metadata as needed
-    }));
+    const { data, error } = await supabase
+      .from('exhibits')
+      .select('*')
+      .order('order_index', { ascending: true });
 
-    return exhibits;
+    if (error) throw error;
+
+    return data || [];
   } catch (error) {
     console.error('Error getting exhibits:', error);
     throw error;
@@ -60,20 +62,137 @@ export const getAllExhibits = async () => {
 // Get single exhibit by ID
 export const getExhibitById = async (id) => {
   try {
-    const exhibits = await getAllExhibits();
-    const exhibit = exhibits.find(ex => ex.id === parseInt(id));
+    const { data, error } = await supabase
+      .from('exhibits')
+      .select('*')
+      .eq('id', id)
+      .single();
 
-    if (!exhibit) {
-      throw new Error('Exhibit not found');
-    }
+    if (error) throw error;
 
-    return exhibit;
+    return data;
   } catch (error) {
     console.error('Error getting exhibit:', error);
     throw error;
   }
 };
 
-// TODO: Add functions for Supabase integration when ready
-// export const uploadExhibitImage = async (file) => { ... }
-// export const deleteExhibitImage = async (id) => { ... }
+// Upload exhibit image to Supabase storage with compression
+export const uploadExhibitImage = async (file) => {
+  try {
+    // Compress image before upload for better performance
+    const compressedFile = await compressImage(file);
+    
+    const fileExt = 'jpg'; // Always use jpg after compression
+    const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
+    const filePath = `${fileName}`;
+
+    // Upload to Supabase storage with cache control
+    const { error: uploadError } = await supabase.storage
+      .from('moments')
+      .upload(filePath, compressedFile, {
+        cacheControl: '3600',
+        upsert: false
+      });
+
+    if (uploadError) throw uploadError;
+
+    // Get public URL
+    const { data: { publicUrl } } = supabase.storage
+      .from('moments')
+      .getPublicUrl(filePath);
+
+    return { filePath, publicUrl };
+  } catch (error) {
+    console.error('Error uploading exhibit image:', error);
+    throw error;
+  }
+};
+
+// Create new exhibit
+export const createExhibit = async (exhibitData) => {
+  try {
+    const { data, error } = await supabase
+      .from('exhibits')
+      .insert([exhibitData])
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    return data;
+  } catch (error) {
+    console.error('Error creating exhibit:', error);
+    throw error;
+  }
+};
+
+// Update exhibit
+export const updateExhibit = async (id, exhibitData) => {
+  try {
+    const { data, error } = await supabase
+      .from('exhibits')
+      .update(exhibitData)
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    return data;
+  } catch (error) {
+    console.error('Error updating exhibit:', error);
+    throw error;
+  }
+};
+
+// Delete exhibit
+export const deleteExhibit = async (id) => {
+  try {
+    // Get exhibit to find image path
+    const exhibit = await getExhibitById(id);
+
+    // Delete from storage if image exists
+    if (exhibit.image_path) {
+      const { error: storageError } = await supabase.storage
+        .from('moments')
+        .remove([exhibit.image_path]);
+
+      if (storageError) console.error('Error deleting image from storage:', storageError);
+    }
+
+    // Delete from database
+    const { error } = await supabase
+      .from('exhibits')
+      .delete()
+      .eq('id', id);
+
+    if (error) throw error;
+
+    return true;
+  } catch (error) {
+    console.error('Error deleting exhibit:', error);
+    throw error;
+  }
+};
+
+// Update exhibit order
+export const updateExhibitOrder = async (exhibits) => {
+  try {
+    const updates = exhibits.map((exhibit, index) => ({
+      id: exhibit.id,
+      order_index: index
+    }));
+
+    const { error } = await supabase
+      .from('exhibits')
+      .upsert(updates);
+
+    if (error) throw error;
+
+    return true;
+  } catch (error) {
+    console.error('Error updating exhibit order:', error);
+    throw error;
+  }
+};

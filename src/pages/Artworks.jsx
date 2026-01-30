@@ -15,10 +15,30 @@ const Artworks = () => {
   if (loading) {
     return (
       <AdminLayout>
-        <div className="flex items-center justify-center py-12">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brown-600 mx-auto"></div>
-            <p className="mt-4 text-brown-600">Loading artworks...</p>
+        <div className="space-y-6">
+          {/* Header Skeleton */}
+          <div className="flex items-center justify-between">
+            <div className="space-y-2">
+              <div className="h-10 bg-brown-200 rounded-lg w-64 animate-pulse"></div>
+              <div className="h-5 bg-brown-200 rounded-lg w-48 animate-pulse"></div>
+            </div>
+            <div className="h-10 bg-brown-200 rounded-lg w-40 animate-pulse"></div>
+          </div>
+
+          {/* List Skeleton */}
+          <div className="space-y-4">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="bg-white rounded-xl shadow-sm border border-brown-100 p-4">
+                <div className="flex gap-4">
+                  <div className="w-24 h-24 bg-brown-100 rounded-lg animate-pulse flex-shrink-0"></div>
+                  <div className="flex-1 space-y-3">
+                    <div className="h-6 bg-brown-200 rounded w-3/4 animate-pulse"></div>
+                    <div className="h-4 bg-brown-200 rounded w-1/2 animate-pulse"></div>
+                    <div className="h-4 bg-brown-200 rounded w-1/3 animate-pulse"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </AdminLayout>
