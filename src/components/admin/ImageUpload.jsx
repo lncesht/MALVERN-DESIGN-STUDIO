@@ -13,14 +13,14 @@ const ImageUpload = ({ onImageSelect, currentImage, label = "Artwork Image" }) =
     try {
       validateImageFile(file);
       
-      // Create preview
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreview(reader.result);
       };
       reader.readAsDataURL(file);
       
-      // Pass file to parent
+
       onImageSelect(file);
     } catch (error) {
       toast.error(error.message);
@@ -65,7 +65,7 @@ const ImageUpload = ({ onImageSelect, currentImage, label = "Artwork Image" }) =
       </label>
 
       {preview ? (
-        // Image Preview
+
         <div className="relative">
           <img
             src={preview}
@@ -91,7 +91,7 @@ const ImageUpload = ({ onImageSelect, currentImage, label = "Artwork Image" }) =
           </button>
         </div>
       ) : (
-        // Upload Area
+
         <div
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}

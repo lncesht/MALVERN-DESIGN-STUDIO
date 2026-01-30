@@ -25,7 +25,7 @@ const ArtworkForm = ({ artwork = null, isEdit = false }) => {
     featured: false,
   });
 
-  // Load existing artwork data if editing
+
   useEffect(() => {
     if (artwork) {
       setFormData({
@@ -78,9 +78,9 @@ const ArtworkForm = ({ artwork = null, isEdit = false }) => {
       let imageUrl = formData.imageUrl;
       let imagePath = formData.imagePath;
 
-      // Upload new image if selected
+      
       if (imageFile) {
-        // Delete old image if editing and has old image
+
         if (isEdit && formData.imagePath) {
           await deleteImage(formData.imagePath);
         }

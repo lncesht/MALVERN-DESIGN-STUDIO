@@ -69,7 +69,7 @@ const EditExhibit = () => {
         await updateExhibit(id, updateData);
         setShowSuccess(true);
       } else {
-        // No changes if no new image
+
         setErrorMessage('No changes made. Please upload a new image.');
         setShowError(true);
       }

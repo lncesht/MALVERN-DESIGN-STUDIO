@@ -12,7 +12,7 @@ export const getAllArtworks = async () => {
     
     if (error) throw error;
     
-    // Convert snake_case to camelCase for consistency with existing code
+
     const artworks = data.map(artwork => ({
       id: artwork.id,
       title: artwork.title,
@@ -39,7 +39,7 @@ export const getAllArtworks = async () => {
   }
 };
 
-// Get single artwork by ID
+
 export const getArtworkById = async (id) => {
   try {
     const { data, error } = await supabase
@@ -51,7 +51,7 @@ export const getArtworkById = async (id) => {
     if (error) throw error;
     if (!data) throw new Error('Artwork not found');
     
-    // Convert snake_case to camelCase
+
     return {
       id: data.id,
       title: data.title,
@@ -79,11 +79,10 @@ export const getArtworkById = async (id) => {
 // Add new artwork
 export const addArtwork = async (artworkData) => {
   try {
-    // Get current user
+
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error('User not authenticated');
     
-    // Convert camelCase to snake_case for database
     const dbData = {
       title: artworkData.title,
       artist: artworkData.artist,
@@ -118,7 +117,7 @@ export const addArtwork = async (artworkData) => {
 // Update artwork
 export const updateArtwork = async (id, artworkData) => {
   try {
-    // Convert camelCase to snake_case for database
+
     const dbData = {};
     if (artworkData.title !== undefined) dbData.title = artworkData.title;
     if (artworkData.artist !== undefined) dbData.artist = artworkData.artist;
@@ -163,7 +162,7 @@ export const deleteArtwork = async (id) => {
 // Delete all artworks
 export const deleteAllArtworks = async () => {
   try {
-    // Get current user
+
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error('User not authenticated');
     
@@ -192,7 +191,6 @@ export const getFeaturedArtworks = async () => {
     
     if (error) throw error;
     
-    // Convert snake_case to camelCase
     const artworks = data.map(artwork => ({
       id: artwork.id,
       title: artwork.title,
@@ -234,7 +232,7 @@ export const getArtworksByCategory = async (category) => {
     
     if (error) throw error;
     
-    // Convert snake_case to camelCase
+    
     const artworks = data.map(artwork => ({
       id: artwork.id,
       title: artwork.title,

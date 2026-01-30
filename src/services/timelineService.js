@@ -43,7 +43,7 @@ export const updateExhibitionDate = async (date) => {
   }
 };
 
-// Get all timeline events
+
 export const getTimelineEvents = async () => {
   try {
     const { data, error } = await supabase
@@ -60,7 +60,7 @@ export const getTimelineEvents = async () => {
   }
 };
 
-// Get single timeline event
+
 export const getTimelineEventById = async (id) => {
   try {
     const { data, error } = await supabase

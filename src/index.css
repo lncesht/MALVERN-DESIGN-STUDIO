@@ -11,14 +11,14 @@
     @apply font-display;
   }
   
-  /* Smooth scrolling */
+
   html {
     scroll-behavior: smooth;
   }
 }
 
 @layer components {
-  /* Responsive Button Styles */
+
   .btn-primary {
     @apply px-4 py-2.5 sm:px-6 sm:py-3 bg-brown-700 text-warm-50 rounded-lg font-medium 
            hover:bg-brown-800 active:bg-brown-900 transition-all duration-200 
@@ -33,25 +33,25 @@
            text-sm sm:text-base touch-manipulation;
   }
   
-  /* Responsive Card */
+
   .card {
     @apply bg-warm-50 rounded-lg sm:rounded-xl shadow-sm hover:shadow-xl 
            transition-shadow duration-300;
   }
   
-  /* Responsive Container - Mobile First */
+
   .container-custom {
     @apply w-full mx-auto 
            px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20
            max-w-[1920px];
   }
   
-  /* Responsive Section Padding */
+
   .section-padding {
     @apply py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28;
   }
   
-  /* Responsive Text Sizes */
+
   .heading-xl {
     @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold;
   }
@@ -68,12 +68,12 @@
     @apply text-lg sm:text-xl md:text-2xl font-display font-bold;
   }
   
-  /* Responsive Grid */
+
   .grid-responsive {
     @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8;
   }
   
-  /* Touch-friendly Interactive Elements */
+
   .touch-target {
     @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
   }
@@ -84,7 +84,7 @@
     text-wrap: balance;
   }
   
-  /* Hide scrollbar but keep functionality */
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -94,7 +94,7 @@
     display: none;
   }
   
-  /* Responsive aspect ratios */
+
   .aspect-square {
     aspect-ratio: 1 / 1;
   }
@@ -108,7 +108,7 @@
   }
 }
 
-/* Custom scrollbar - Desktop only */
+
 @media (min-width: 768px) {
   ::-webkit-scrollbar {
     width: 10px;
@@ -128,7 +128,7 @@
   }
 }
 
-/* Mobile scrollbar - Thinner */
+
 @media (max-width: 767px) {
   ::-webkit-scrollbar {
     width: 4px;
@@ -144,7 +144,7 @@
   }
 }
 
-/* Animations */
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -208,7 +208,7 @@
   animation: popup 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Prevent text selection on touch devices for better UX */
+
 @media (hover: none) {
   button, .btn-primary, .btn-secondary {
     -webkit-tap-highlight-color: transparent;
@@ -219,12 +219,12 @@
 /* Masonry Grid Styles */
 .my-masonry-grid {
   display: flex;
-  margin-left: -16px; /* gutter size offset */
+  margin-left: -16px; 
   width: auto;
 }
 
 .my-masonry-grid_column {
-  padding-left: 16px; /* gutter size */
+  padding-left: 16px; 
   background-clip: padding-box;
 }
 

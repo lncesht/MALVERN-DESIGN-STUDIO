@@ -12,12 +12,12 @@ const ArtworkItem = ({ artwork, onDelete }) => {
   const handleDelete = async () => {
     setDeleting(true);
     try {
-      // Delete image from storage
+
       if (artwork.imagePath) {
         await deleteImage(artwork.imagePath);
       }
       
-      // Delete artwork from database
+
       await deleteArtwork(artwork.id);
       
       toast.success('Artwork deleted successfully');

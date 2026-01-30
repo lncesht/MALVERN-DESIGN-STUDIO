@@ -42,7 +42,7 @@ const compressImage = (file, maxWidth = 1920, quality = 0.8) => {
   });
 };
 
-// Get all exhibit images from Supabase
+
 export const getAllExhibits = async () => {
   try {
     const { data, error } = await supabase
@@ -59,7 +59,7 @@ export const getAllExhibits = async () => {
   }
 };
 
-// Get single exhibit by ID
+
 export const getExhibitById = async (id) => {
   try {
     const { data, error } = await supabase
@@ -77,17 +77,17 @@ export const getExhibitById = async (id) => {
   }
 };
 
-// Upload exhibit image to Supabase storage with compression
+
 export const uploadExhibitImage = async (file) => {
   try {
-    // Compress image before upload for better performance
+
     const compressedFile = await compressImage(file);
     
-    const fileExt = 'jpg'; // Always use jpg after compression
+    const fileExt = 'jpg'; 
     const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
     const filePath = `${fileName}`;
 
-    // Upload to Supabase storage with cache control
+
     const { error: uploadError } = await supabase.storage
       .from('moments')
       .upload(filePath, compressedFile, {
@@ -149,10 +149,10 @@ export const updateExhibit = async (id, exhibitData) => {
 // Delete exhibit
 export const deleteExhibit = async (id) => {
   try {
-    // Get exhibit to find image path
+
     const exhibit = await getExhibitById(id);
 
-    // Delete from storage if image exists
+
     if (exhibit.image_path) {
       const { error: storageError } = await supabase.storage
         .from('moments')

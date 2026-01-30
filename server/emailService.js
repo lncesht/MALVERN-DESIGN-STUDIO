@@ -6,7 +6,7 @@ const createTransporter = () => {
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT),
-    secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
+    secure: process.env.SMTP_SECURE === 'true', 
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
@@ -14,19 +14,19 @@ const createTransporter = () => {
   });
 };
 
-// Send email function
+
 const sendContactEmail = async (formData) => {
   try {
     const transporter = createTransporter();
 
-    // Email 1: Confirmation to the person who submitted the form
+
     const userMailOptions = {
       from: {
         name: 'Art Visa Portfolio',
         address: process.env.SMTP_USER,
       },
-      to: formData.email, // Send to the person who filled out the form
-      replyTo: process.env.SMTP_USER, // Allow them to reply to you
+      to: formData.email, 
+      replyTo: process.env.SMTP_USER, 
       subject: `Thank you for contacting Art Visa - We received your message`,
       html: `
         <!DOCTYPE html>
@@ -149,14 +149,14 @@ This is an automated confirmation email.
       `,
     };
 
-    // Email 2: Notification to website owner about new submission
+
     const ownerMailOptions = {
       from: {
         name: 'Art Visa Contact Form',
         address: process.env.SMTP_USER,
       },
-      to: process.env.SMTP_USER, // Send to website owner (lanesrateam@gmail.com)
-      replyTo: formData.email, // Allow owner to reply directly to the sender
+      to: process.env.SMTP_USER, 
+      replyTo: formData.email, 
       subject: `New Contact Form Submission from ${formData.name}`,
       html: `
         <!DOCTYPE html>
@@ -282,7 +282,7 @@ Click "Reply" to respond directly to ${formData.name}
       `,
     };
 
-    // Send both emails
+
     const userEmail = await transporter.sendMail(userMailOptions);
     console.log('✅ Confirmation email sent to user:', userEmail.messageId);
     

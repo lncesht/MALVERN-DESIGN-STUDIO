@@ -5,10 +5,10 @@ const ArtworkList = ({ artworks, onArtworkDelete }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('All');
 
-  // Get unique categories
+
   const categories = ['All', ...new Set(artworks.map(art => art.category))];
 
-  // Filter artworks
+
   const filteredArtworks = artworks.filter(artwork => {
     const matchesSearch = artwork.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          artwork.artist.toLowerCase().includes(searchTerm.toLowerCase());
@@ -16,7 +16,7 @@ const ArtworkList = ({ artworks, onArtworkDelete }) => {
     return matchesSearch && matchesCategory;
   });
 
-  // Sort by artwork number (if available), then by created date
+
   const sortedArtworks = [...filteredArtworks].sort((a, b) => {
     if (a.artworkNumber && b.artworkNumber) {
       return a.artworkNumber - b.artworkNumber;

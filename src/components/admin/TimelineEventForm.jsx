@@ -70,7 +70,7 @@ const TimelineEventForm = ({ event, onSubmit, onCancel }) => {
       ...prev,
       [name]: value
     }));
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -79,9 +79,9 @@ const TimelineEventForm = ({ event, onSubmit, onCancel }) => {
     }
   };
 
-  // Check if form has been modified
+
   const hasChanges = () => {
-    if (!originalData) return true; // For new events, always allow submission
+    if (!originalData) return true; 
     
     return (
       formData.time !== originalData.time ||

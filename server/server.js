@@ -46,7 +46,7 @@ app.post('/api/send-email', async (req, res) => {
       });
     }
 
-    // Prepare form data
+
     const formData = {
       name: name.trim(),
       email: email.trim(),
@@ -100,7 +100,7 @@ app.use((err, req, res, next) => {
 // Start server
 const startServer = async () => {
   try {
-    // Verify SMTP connection before starting server
+
     console.log('🔍 Verifying SMTP connection...');
     const isConnected = await verifyConnection();
     
@@ -130,7 +130,7 @@ const startServer = async () => {
   }
 };
 
-// Handle graceful shutdown
+
 process.on('SIGTERM', () => {
   console.log('👋 SIGTERM received, shutting down gracefully...');
   process.exit(0);
@@ -141,5 +141,5 @@ process.on('SIGINT', () => {
   process.exit(0);
 });
 
-// Start the server
+
 startServer();

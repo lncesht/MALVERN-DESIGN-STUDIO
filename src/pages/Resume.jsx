@@ -8,7 +8,7 @@ const Resume = () => {
   const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
-    // Scroll to top when component mounts
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     const fetchCV = async () => {
@@ -42,7 +42,7 @@ const Resume = () => {
     try {
       const imageUrl = cvData.image_url || cvData.imageUrl;
       if (imageUrl) {
-        // Create a new window with the image for printing as PDF
+        
         const printWindow = window.open('', '_blank');
         printWindow.document.write(`
           <!DOCTYPE html>

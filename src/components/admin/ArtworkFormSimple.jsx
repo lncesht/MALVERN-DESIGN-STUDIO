@@ -122,7 +122,7 @@ const ArtworkFormSimple = ({ artwork = null, isEdit = false }) => {
       return;
     }
     
-    // Check if image is required
+
     if (!isEdit && !imageFile) {
       toast.error('Please select an image');
       return;
@@ -133,14 +133,14 @@ const ArtworkFormSimple = ({ artwork = null, isEdit = false }) => {
     let uploadedImagePath = formData.imagePath;
 
     try {
-      // Upload new image if selected
+
       if (imageFile) {
         setUploading(true);
         const uploadResult = await uploadImage(imageFile);
         uploadedImageUrl = uploadResult.url;
         uploadedImagePath = uploadResult.path;
         
-        // Delete old image if updating
+
         if (isEdit && formData.imagePath) {
           await deleteImage(formData.imagePath);
         }

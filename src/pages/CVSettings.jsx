@@ -22,7 +22,7 @@ const CVSettings = () => {
           .eq('key', 'cv')
           .single();
         
-        // PGRST116 = Row not found (no CV uploaded yet) - this is OK
+
         if (error && error.code !== 'PGRST116') {
           throw error;
         }
@@ -34,10 +34,10 @@ const CVSettings = () => {
           setImagePath(path);
           setImagePreview(url);
         }
-        // If no data and error is PGRST116, it just means no CV has been uploaded yet
+
       } catch (error) {
         console.error('Error fetching CV:', error);
-        // Only show error toast for actual errors, not for "no CV found"
+
         if (error.code !== 'PGRST116') {
           toast.error('Failed to load CV settings');
         }
@@ -54,10 +54,10 @@ const CVSettings = () => {
     if (!file) return;
 
     try {
-      // Validate file
+
       validateImageFile(file);
       
-      // Set file and create preview
+
       setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -72,7 +72,7 @@ const CVSettings = () => {
 
   const handleRemoveImage = () => {
     setImageFile(null);
-    setImagePreview(imageUrl); // Reset to saved image
+    setImagePreview(imageUrl); 
     const fileInput = document.getElementById('cvImageFile');
     if (fileInput) fileInput.value = '';
   };
@@ -90,14 +90,14 @@ const CVSettings = () => {
     let uploadedImagePath = imagePath;
 
     try {
-      // Upload new image if selected
+
       if (imageFile) {
         setUploading(true);
         const uploadResult = await uploadImage(imageFile, 'cv');
         uploadedImageUrl = uploadResult.url;
         uploadedImagePath = uploadResult.path;
         
-        // Delete old image if exists
+
         if (imagePath) {
           await deleteImage(imagePath);
         }

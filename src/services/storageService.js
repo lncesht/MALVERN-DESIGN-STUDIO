@@ -2,7 +2,7 @@ import { supabase } from '../config/supabase';
 
 const BUCKET_NAME = 'artworks';
 
-// Compress image before upload for better performance
+
 const compressImage = (file, maxWidth = 1920, quality = 0.8) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -15,7 +15,7 @@ const compressImage = (file, maxWidth = 1920, quality = 0.8) => {
         let width = img.width;
         let height = img.height;
 
-        // Calculate new dimensions while maintaining aspect ratio
+
         if (width > maxWidth) {
           height = (height * maxWidth) / width;
           width = maxWidth;
@@ -44,23 +44,23 @@ const compressImage = (file, maxWidth = 1920, quality = 0.8) => {
   });
 };
 
-// Upload image to Supabase Storage with compression
+
 export const uploadImage = async (file, folder = 'artworks') => {
   try {
     // Get current user
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error('User not authenticated');
     
-    // Compress image before upload for better performance
+
     const compressedFile = await compressImage(file);
     
-    // Create a unique filename
+
     const timestamp = Date.now();
-    const fileExt = 'jpg'; // Always use jpg after compression
+    const fileExt = 'jpg'; 
     const filename = `${timestamp}_${Math.random().toString(36).substring(2)}.${fileExt}`;
     const filePath = `${user.id}/${filename}`;
     
-    // Upload file to Supabase Storage with cache control
+
     const { data, error } = await supabase.storage
       .from(BUCKET_NAME)
       .upload(filePath, compressedFile, {
@@ -85,7 +85,7 @@ export const uploadImage = async (file, folder = 'artworks') => {
   }
 };
 
-// Delete image from Supabase Storage
+
 export const deleteImage = async (imagePath) => {
   try {
     if (!imagePath) return;
@@ -95,14 +95,14 @@ export const deleteImage = async (imagePath) => {
       .remove([imagePath]);
     
     if (error) {
-      // Don't throw error if image doesn't exist
+
       if (!error.message?.includes('not found')) {
         throw error;
       }
     }
   } catch (error) {
     console.error('Error deleting image:', error);
-    // Don't throw error if image doesn't exist
+
     if (!error.message?.includes('not found')) {
       throw error;
     }
