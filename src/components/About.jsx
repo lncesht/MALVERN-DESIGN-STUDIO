@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../config/supabase';
-import { useNavigate } from 'react-router-dom';
 
 const About = () => {
-  const [cvData, setCvData] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const navigate = useNavigate();
 
   const totalSlides = 4;
 
@@ -28,35 +24,6 @@ const About = () => {
 
   const goToNext = () => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch CV
-        const { data, error } = await supabase
-          .from('settings')
-          .select('*')
-          .eq('key', 'cv')
-          .single();
-        
-        if (error && error.code !== 'PGRST116') {
-          throw error;
-        }
-        
-        if (data) {
-          setCvData(data);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleViewCV = () => {
-    navigate('/resume');
   };
 
   return (
@@ -153,28 +120,12 @@ const About = () => {
                 John Price is a multi-disciplinary artist whose practice spans painting, illustration, architecture, narrative and spatial design.
                 His work investigates the layered relationship between memory, material and emotional resonance.   
                 This exhibition celebrates his 'Farewell to Arabia' after almost 17 years in the Gulf Region; a reflective collection of work spanning the last 6 years, through a blend of abstraction, symbolism, and structural sensitivity.
-
               </p>
 
               <p className="text-sm sm:text-base md:text-lg text-brown-700 leading-relaxed">
                 The next chapter of this artistic journey will see John return to Saudi Arabia, periodically,
                 to further engage with the emerging arts and culture scene exploring more complex and dramatic landscapes set against emerging life experiences.
               </p>
-
-              {/* CV Button - Only show if CV exists - Responsive */}
-              {cvData && (cvData.image_url || cvData.imageUrl) && (
-                <div className="pt-2 sm:pt-4">
-                  <button
-                    onClick={handleViewCV}
-                    className="inline-flex items-center gap-2 bg-brown-600 text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg font-medium hover:bg-brown-700 active:bg-brown-800 transition-colors shadow-md hover:shadow-lg text-sm sm:text-base w-full sm:w-auto justify-center sm:justify-start"
-                  >
-                    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    View My CV/Resume
-                  </button>
-                </div>
-              )}
             </div>
           </div>
 

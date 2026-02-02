@@ -7,14 +7,12 @@ import ArtGallery from './components/ArtGallery';
 import About from './components/About';
 import Footer from './components/Footer';
 import FloatingLogo from './components/FloatingLogo';
-import Resume from './pages/Resume';
 import Exhibits from './pages/Exhibits';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
 import AddArtwork from './pages/AddArtwork';
 import EditArtwork from './pages/EditArtwork';
 import Artworks from './pages/Artworks';
-import CVSettings from './pages/CVSettings';
 import TimelineSettings from './pages/TimelineSettings';
 import ExhibitsAdmin from './pages/ExhibitsAdmin';
 import AddExhibit from './pages/AddExhibit';
@@ -61,7 +59,6 @@ function App() {
               <Footer />
             </>
           } />
-          <Route path="/resume" element={<Resume />} />
           <Route path="/exhibits" element={<Exhibits />} />
 
           {/* Admin Routes */}
@@ -84,11 +81,6 @@ function App() {
           <Route path="/admin/edit/:id" element={
             <ProtectedRoute>
               <EditArtwork />
-            </ProtectedRoute>
-          } />
-          <Route path="/admin/cv-settings" element={
-            <ProtectedRoute>
-              <CVSettings />
             </ProtectedRoute>
           } />
           <Route path="/admin/timeline-settings" element={
