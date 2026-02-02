@@ -258,3 +258,22 @@ export const getArtworksByCategory = async (category) => {
     throw error;
   }
 };
+
+export const updateAllCategoriesToOther = async () => {
+  try {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('User not authenticated');
+
+    const { error } = await supabase
+      .from(TABLE_NAME)
+      .update({ category: 'other' })
+      .neq('category', 'other'); 
+    
+    if (error) throw error;
+    
+    return { success: true, message: 'All categories updated to "other"' };
+  } catch (error) {
+    console.error('Error updating all categories:', error);
+    throw error;
+  }
+};

@@ -1,19 +1,31 @@
 import { createClient } from '@supabase/supabase-js';
 
+// Get Supabase credentials from environment variables
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
 
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL || 'https://qzlvrycszdhctjmvuhug.supabase.co';
-const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6bHZyeWNzemRoY3RqbXZ1aHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwNzU5NTksImV4cCI6MjA4NDY1MTk1OX0.4kcWrzKp8Dz5pIgvhMq3IGDF8ULY1U9dRjdCbgNbGMo';
+// Validate that required environment variables are set
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error(
+    'Missing Supabase environment variables. Please check your .env file.\n' +
+    'Required variables:\n' +
+    '- REACT_APP_SUPABASE_URL\n' +
+    '- REACT_APP_SUPABASE_ANON_KEY'
+  );
+}
 
-
+// Create Supabase client with secure configuration
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
-    detectSessionInUrl: true
+    detectSessionInUrl: true,
+    // Add storage key for better session management
+    storageKey: 'malvern-studio-auth',
   }
 });
 
-
+// Export auth, db, and storage for convenience
 export const auth = supabase.auth;
 export const db = supabase;
 export const storage = supabase.storage;

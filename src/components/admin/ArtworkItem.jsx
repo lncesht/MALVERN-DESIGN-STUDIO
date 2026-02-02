@@ -59,26 +59,28 @@ const ArtworkItem = ({ artwork, onDelete }) => {
         </div>
 
         {/* Content */}
-        <div className="p-4">
-          <h3 className="text-lg font-semibold text-brown-900 mb-1">
-            {artwork.title}
-          </h3>
-          <p className="text-sm text-brown-600 mb-2">
-            {artwork.artist} • {artwork.year}
-          </p>
-          <div className="flex items-center gap-2 mb-3">
-            <span className="inline-block px-2 py-1 bg-brown-100 text-brown-700 text-xs rounded">
-              {artwork.category}
-            </span>
-            {artwork.medium && (
-              <span className="text-xs text-brown-500">
-                {artwork.medium}
+        <div className="p-4 flex flex-col h-[180px]">
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold text-brown-900 mb-1 line-clamp-2">
+              {artwork.title}
+            </h3>
+            <p className="text-sm text-brown-600 mb-2">
+              {artwork.artist} • {artwork.year}
+            </p>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="inline-block px-2 py-1 bg-brown-100 text-brown-700 text-xs rounded">
+                {artwork.category}
               </span>
-            )}
+              {artwork.medium && (
+                <span className="text-xs text-brown-500 truncate">
+                  {artwork.medium}
+                </span>
+              )}
+            </div>
           </div>
 
-          {/* Actions */}
-          <div className="flex gap-2">
+          {/* Actions - Always at bottom */}
+          <div className="flex gap-2 mt-auto">
             <button
               onClick={() => navigate(`/admin/edit/${artwork.id}`)}
               className="flex-1 px-3 py-2 bg-brown-600 text-white rounded-lg hover:bg-brown-700 hover:scale-105 transition-all duration-200 text-sm font-medium"

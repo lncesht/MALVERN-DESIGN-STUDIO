@@ -17,26 +17,26 @@ const Hero = () => {
         }}></div>
       </div>
 
-      <div className="container-custom relative z-10 text-center px-4 py-16 sm:py-20 md:py-24">
-        <div className="max-w-5xl mx-auto animate-fade-in">
-          {/* Badge - Responsive */}
-          <div className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-primary-200 text-brown-800 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8">
-            <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            Art Collection
+      <div className="container-custom relative z-10 text-center px-4 py-12 sm:py-16 md:py-20">
+        <div className="max-w-6xl mx-auto animate-fade-in">
+          {/* Centered Logo */}
+          <div className="flex justify-center mb-8 sm:mb-10 md:mb-0">
+            <div className="w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] xl:w-[32rem] xl:h-[32rem] flex items-center justify-center">
+              <img 
+                src="/img/price_logo.png" 
+                alt="Malvern Design Studio Logo" 
+                className="w-full h-full object-contain drop-shadow-2xl"
+              />
+            </div>
           </div>
 
-          {/* Main Heading - Fully Responsive */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-brown-900 mb-8 sm:mb-10 md:mb-12 leading-tight px-2" style={{ fontFamily: 'Cinzel, serif', letterSpacing: '0.15em' }}>
-            <span className="block">Malvern Design</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-900 mt-2">
-              Studio
-            </span>
+          {/* Main Heading - Single Line */}
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-brown-900 mb-8 sm:mb-10 md:mb-12 leading-tight px-2 whitespace-nowrap" style={{ fontFamily: 'Cinzel, serif', letterSpacing: '0.1em' }}>
+            Malvern Design Studio
           </h1>
 
-          {/* CTA Buttons - Responsive sizing */}
-          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4 mb-12 sm:mb-16 md:mb-20">
             <button
               onClick={scrollToGallery}
               className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
@@ -45,39 +45,22 @@ const Hero = () => {
             </button>
           </div>
 
-          {/* Stats - Responsive grid */}
-          <div className="grid grid-cols-2 sm:flex sm:justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20 mt-12 sm:mt-16 md:mt-20 px-4">
+          {/* Stats */}
+          <div className="grid grid-cols-2 sm:flex sm:justify-center gap-12 sm:gap-16 md:gap-20 lg:gap-24 px-4">
             <div className="text-center group">
-              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brown-700 mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-200">
+              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-brown-700 mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-200">
                 50+
               </div>
-              <div className="text-brown-600 text-xs sm:text-sm md:text-base">Artworks</div>
+              <div className="text-brown-600 text-sm sm:text-base md:text-lg">Artworks</div>
             </div>
             <div className="text-center group">
-              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brown-700 mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-200">
-                10+
+              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-brown-700 mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-200">
+                5+
               </div>
-              <div className="text-brown-600 text-xs sm:text-sm md:text-base">Categories</div>
+              <div className="text-brown-600 text-sm sm:text-base md:text-lg">Categories</div>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Scroll Indicator - Hidden on mobile */}
-      <div className="hidden sm:block absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <svg
-          className="w-5 h-5 sm:w-6 sm:h-6 text-brown-400"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 14l-7 7m0 0l-7-7m7 7V3"
-          />
-        </svg>
       </div>
     </section>
   );

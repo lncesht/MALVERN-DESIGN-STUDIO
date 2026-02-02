@@ -1,16 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const FloatingLogo = () => {
   const location = useLocation();
-  
-  // Only show on the home page
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      return;
+    }
+
+    const handleScroll = () => {
+      const heroSection = document.getElementById('hero');
+      
+      if (heroSection) {
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+        const scrollPosition = window.scrollY + window.innerHeight / 2;
+        
+        if (scrollPosition > heroBottom) {
+          setIsVisible(true);
+        } else {
+          setIsVisible(false);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [location.pathname]);
+
   if (location.pathname !== '/') {
     return null;
   }
 
   return (
-    <div className="fixed right-8 top-24 z-40 hidden lg:block">
+    <div 
+      className={`fixed right-8 bottom-8 z-40 hidden lg:block transition-opacity duration-500 ease-in-out hover:opacity-100 ${
+        isVisible ? 'opacity-50' : 'opacity-0 pointer-events-none'
+      }`}
+    >
       <div className="bg-transparent rounded-2xl p-2">
         <img 
           src="/img/price_logo.png" 
