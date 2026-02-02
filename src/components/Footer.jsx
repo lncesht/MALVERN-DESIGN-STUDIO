@@ -21,7 +21,6 @@ const Footer = () => {
       [name]: value
     }));
     
-    // Clear field-specific error when user starts typing
     if (fieldErrors[name]) {
       setFieldErrors(prev => ({
         ...prev,
@@ -29,18 +28,15 @@ const Footer = () => {
       }));
     }
     
-    // Clear general error message when user starts typing
     if (submitStatus === 'error') {
       setSubmitStatus(null);
       setErrorMessage('');
     }
   };
 
-  // Validate form fields
   const validateForm = () => {
     const errors = {};
-    
-    // Name validation
+
     if (!formData.name.trim()) {
       errors.name = 'Name is required';
     } else if (formData.name.trim().length < 2) {
@@ -71,7 +67,6 @@ const Footer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validate form before submission
     if (!validateForm()) {
       return;
     }
@@ -89,13 +84,13 @@ const Footer = () => {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', country: '', message: '' });
         
-        // Auto-dismiss success message after 3 seconds
+
         setTimeout(() => {
           setSubmitStatus(null);
         }, 3000);
       } else {
         setSubmitStatus('error');
-        // Provide specific error messages
+
         if (result.error.includes('network') || result.error.includes('fetch')) {
           setErrorMessage('Unable to connect to the server. Please check your internet connection and try again.');
         } else if (result.error.includes('email')) {
@@ -108,7 +103,7 @@ const Footer = () => {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
       
-      // Provide user-friendly error messages based on error type
+
       if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
         setErrorMessage('Cannot connect to the email service. Please check your internet connection or try again later.');
       } else if (error.message.includes('timeout')) {
@@ -121,7 +116,7 @@ const Footer = () => {
     }
   };
 
-  // Auto-dismiss error messages after 5 seconds
+
   useEffect(() => {
     if (submitStatus === 'error') {
       const timer = setTimeout(() => {
