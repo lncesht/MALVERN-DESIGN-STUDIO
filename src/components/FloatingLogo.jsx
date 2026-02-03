@@ -41,7 +41,7 @@ const FloatingLogo = () => {
     >
       <div className="bg-transparent rounded-2xl p-2">
         <img 
-          src="/img/price_logo.png"
+          src={`${process.env.PUBLIC_URL}/img/price_logo.png`}
           alt="Price Signature Logo" 
           className="w-32 h-32 md:w-52 md:h-52 object-contain drop-shadow-lg"
         />
