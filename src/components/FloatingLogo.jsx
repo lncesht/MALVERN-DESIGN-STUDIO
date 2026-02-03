@@ -11,22 +11,19 @@ const FloatingLogo = () => {
     }
 
     const handleScroll = () => {
-      const heroSection = document.getElementById('hero');
+      // Show logo when scrolled down more than 80% of viewport height
+      const scrollThreshold = window.innerHeight * 0.8;
       
-      if (heroSection) {
-        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-        const scrollPosition = window.scrollY + window.innerHeight / 2;
-        
-        if (scrollPosition > heroBottom) {
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
+      if (window.scrollY > scrollThreshold) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     
+    // Check initial scroll position
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
