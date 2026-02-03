@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Masonry from 'react-masonry-css';
 import { getFeaturedArtworks } from '../services/artworkService';
+import OptimizedImage from './OptimizedImage';
 
 const ArtGallery = () => {
   const [artworks, setArtworks] = useState([]);
@@ -202,12 +203,11 @@ const ArtGallery = () => {
               <div className="relative overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] bg-white">
                 {/* Artwork Image */}
                 <div className="relative">
-                  <img
+                  <OptimizedImage
                     src={artwork.imageUrl || artwork.image}
                     alt={artwork.title}
-                    className="w-full h-auto object-cover"
-                    loading="lazy"
-                    decoding="async"
+                    className="rounded-t-xl"
+                    aspectRatio="auto"
                   />
                   
                     

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteArtwork } from '../../services/artworkService';
 import { deleteImage } from '../../services/storageService';
 import toast from 'react-hot-toast';
+import OptimizedImage from '../OptimizedImage';
 
 const ArtworkItem = ({ artwork, onDelete }) => {
   const navigate = useNavigate();
@@ -35,24 +36,23 @@ const ArtworkItem = ({ artwork, onDelete }) => {
     <>
       <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
         {/* Image */}
-        <div className="relative h-48 bg-brown-100">
-          <img
+        <div className="relative h-48">
+          <OptimizedImage
             src={artwork.imageUrl || artwork.image}
             alt={artwork.title}
-            className="w-full h-full object-cover"
-            loading="lazy"
-            decoding="async"
+            className="rounded-t-lg"
+            aspectRatio="16/9"
           />
           {/* Artwork Number Badge */}
           {artwork.artworkNumber && (
-            <div className="absolute top-2 left-2 w-10 h-10 bg-brown-700 rounded-full shadow-lg flex items-center justify-center">
+            <div className="absolute top-2 left-2 w-10 h-10 bg-brown-700 rounded-full shadow-lg flex items-center justify-center z-10">
               <span className="text-white font-bold text-sm">
                 {artwork.artworkNumber}
               </span>
             </div>
           )}
           {artwork.featured && (
-            <div className="absolute top-2 right-2 bg-yellow-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+            <div className="absolute top-2 right-2 bg-yellow-500 text-white px-2 py-1 rounded-full text-xs font-medium z-10">
                Featured
             </div>
           )}
