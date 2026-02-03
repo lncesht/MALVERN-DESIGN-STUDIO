@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/MALVERN-DESIGN-STUDIO/static/css/main.c388e322.css",
-    "main.js": "/MALVERN-DESIGN-STUDIO/static/js/main.b310fd6c.js",
+    "main.css": "/MALVERN-DESIGN-STUDIO/static/css/main.1624d99b.css",
+    "main.js": "/MALVERN-DESIGN-STUDIO/static/js/main.8fac72fe.js",
     "index.html": "/MALVERN-DESIGN-STUDIO/index.html",
-    "main.c388e322.css.map": "/MALVERN-DESIGN-STUDIO/static/css/main.c388e322.css.map",
-    "main.b310fd6c.js.map": "/MALVERN-DESIGN-STUDIO/static/js/main.b310fd6c.js.map"
+    "main.1624d99b.css.map": "/MALVERN-DESIGN-STUDIO/static/css/main.1624d99b.css.map",
+    "main.8fac72fe.js.map": "/MALVERN-DESIGN-STUDIO/static/js/main.8fac72fe.js.map"
   },
   "entrypoints": [
-    "static/css/main.c388e322.css",
-    "static/js/main.b310fd6c.js"
+    "static/css/main.1624d99b.css",
+    "static/js/main.8fac72fe.js"
   ]
 }
