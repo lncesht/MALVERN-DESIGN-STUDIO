@@ -11,7 +11,7 @@ const FloatingLogo = () => {
     }
 
     const handleScroll = () => {
-      // Show logo when scrolled down more than 80% of viewport height
+
       const scrollThreshold = window.innerHeight * 0.8;
       
       if (window.scrollY > scrollThreshold) {
@@ -23,7 +23,7 @@ const FloatingLogo = () => {
 
     window.addEventListener('scroll', handleScroll);
     
-    // Check initial scroll position
+
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);

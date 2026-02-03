@@ -109,7 +109,7 @@ export const deleteImage = async (imagePath) => {
   }
 };
 
-// Validate image file
+
 export const validateImageFile = (file) => {
   const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
   const maxSize = 25 * 1024 * 1024; // 25MB

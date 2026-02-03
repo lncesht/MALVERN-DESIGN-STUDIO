@@ -13,27 +13,27 @@ const ArtGallery = () => {
   const [fullscreenImage, setFullscreenImage] = useState(false);
   const [isModalClosing, setIsModalClosing] = useState(false);
   const [isFullscreenClosing, setIsFullscreenClosing] = useState(false);
-  const ITEMS_PER_PAGE = 18; // 6 columns x 3 rows
+  const ITEMS_PER_PAGE = 18; 
 
-  // Handle modal close with animation
+
   const handleCloseModal = () => {
     setIsModalClosing(true);
     setTimeout(() => {
       setSelectedArtwork(null);
       setIsModalClosing(false);
-    }, 300); // Match animation duration
+    }, 300); 
   };
 
-  // Handle fullscreen close with animation
+
   const handleCloseFullscreen = () => {
     setIsFullscreenClosing(true);
     setTimeout(() => {
       setFullscreenImage(false);
       setIsFullscreenClosing(false);
-    }, 300); // Match animation duration
+    }, 300); 
   };
 
-  // Fetch featured artworks only
+
   useEffect(() => {
     const fetchFeaturedArtworks = async () => {
       try {
@@ -59,14 +59,14 @@ const ArtGallery = () => {
     ? artworks
     : artworks.filter(art => art.category === selectedCategory);
 
-  // Limit displayed artworks to 18 unless "See More" is clicked
+
   const displayedArtworks = showAll 
     ? filteredArtworks 
     : filteredArtworks.slice(0, ITEMS_PER_PAGE);
   
   const hasMore = filteredArtworks.length > ITEMS_PER_PAGE;
 
-  // Loading state with skeleton
+
   if (loading) {
     return (
       <section id="gallery" className="min-h-screen relative py-16 sm:py-20 md:py-24 overflow-hidden">

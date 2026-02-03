@@ -5,11 +5,11 @@ const About = () => {
 
   const totalSlides = 4;
 
-  // Auto-play slideshow
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    }, 4000); // Change slide every 4 seconds
+    }, 4000); 
 
     return () => clearInterval(timer);
   }, [totalSlides]);

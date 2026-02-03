@@ -43,11 +43,11 @@ const AddExhibit = () => {
       // Upload image
       const { filePath, publicUrl } = await uploadExhibitImage(formData.image);
 
-      // Create exhibit record
+
       await createExhibit({
         image_url: publicUrl,
         image_path: filePath,
-        order_index: 999 // Will be at the end
+        order_index: 999 
       });
 
       setShowSuccess(true);

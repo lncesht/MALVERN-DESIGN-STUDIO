@@ -1,6 +1,6 @@
 import { supabase } from '../config/supabase';
 
-// Compress image before upload for better performance
+
 const compressImage = (file, maxWidth = 1920, quality = 0.8) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -13,7 +13,7 @@ const compressImage = (file, maxWidth = 1920, quality = 0.8) => {
         let width = img.width;
         let height = img.height;
 
-        // Calculate new dimensions while maintaining aspect ratio
+       
         if (width > maxWidth) {
           height = (height * maxWidth) / width;
           width = maxWidth;
@@ -97,7 +97,7 @@ export const uploadExhibitImage = async (file) => {
 
     if (uploadError) throw uploadError;
 
-    // Get public URL
+
     const { data: { publicUrl } } = supabase.storage
       .from('moments')
       .getPublicUrl(filePath);

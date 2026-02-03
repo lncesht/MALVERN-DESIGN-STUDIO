@@ -23,7 +23,7 @@ const Hero = () => {
           <div className="flex justify-center mb-8 sm:mb-10 md:mb-0">
             <div className="w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] xl:w-[32rem] xl:h-[32rem] flex items-center justify-center">
               <img 
-                src="/img/price_logo.png"
+                src={`${process.env.PUBLIC_URL}/img/price_logo.png`}
                 alt="Malvern Design Studio Logo" 
                 className="w-full h-full object-contain drop-shadow-2xl"
               />

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 const ArtDetail = ({ artwork, onClose }) => {
   useEffect(() => {
-    // Prevent body scroll when modal is open
+
     document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = 'unset';

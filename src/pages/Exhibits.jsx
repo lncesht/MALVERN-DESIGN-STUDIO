@@ -14,7 +14,7 @@ const Exhibits = () => {
   const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
-    // Scroll to top when component mounts
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     const loadData = async () => {

@@ -12,7 +12,7 @@ export const checkArtworkNumberExists = async (artworkNumber, excludeId = null) 
       .select('id')
       .eq('artwork_number', artworkNumber);
     
-    // If editing, exclude the current artwork from the check
+
     if (excludeId) {
       query = query.neq('id', excludeId);
     }
@@ -185,14 +185,14 @@ export const deleteArtwork = async (id) => {
   }
 };
 
-// Delete all artworks
+
 export const deleteAllArtworks = async () => {
   try {
 
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error('User not authenticated');
-    
-    // Delete all artworks for the current user
+
+
     const { error } = await supabase
       .from(TABLE_NAME)
       .delete()

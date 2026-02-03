@@ -14,7 +14,7 @@ const OptimizedImage = ({
   const imgRef = useRef(null);
 
   useEffect(() => {
-    if (priority) return; // Skip intersection observer for priority images
+    if (priority) return; 
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -26,7 +26,7 @@ const OptimizedImage = ({
         });
       },
       {
-        rootMargin: '50px', // Start loading 50px before image enters viewport
+        rootMargin: '50px', 
       }
     );
 

@@ -29,7 +29,7 @@ const Login = () => {
       
       let errorMessage = 'Failed to login';
       
-      // Supabase error handling
+
       if (error.message?.includes('Invalid login credentials')) {
         errorMessage = 'Invalid email or password';
       } else if (error.message?.includes('Email not confirmed')) {
