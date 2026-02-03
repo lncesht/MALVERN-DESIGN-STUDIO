@@ -2,7 +2,6 @@
   "name": "malvern-design-studio",
   "version": "1.0.0",
   "description": "A modern art portfolio web application",
-  "homepage": "https://lncesht.github.io/MALVERN-DESIGN-STUDIO",
   "private": true,
   "dependencies": {
     "@cloudinary/react": "^1.14.3",
