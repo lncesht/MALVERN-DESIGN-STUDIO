@@ -2,6 +2,32 @@ import { supabase } from '../config/supabase';
 
 const TABLE_NAME = 'artworks';
 
+// Check if artwork number exists
+export const checkArtworkNumberExists = async (artworkNumber, excludeId = null) => {
+  try {
+    if (!artworkNumber) return false;
+    
+    let query = supabase
+      .from(TABLE_NAME)
+      .select('id')
+      .eq('artwork_number', artworkNumber);
+    
+    // If editing, exclude the current artwork from the check
+    if (excludeId) {
+      query = query.neq('id', excludeId);
+    }
+    
+    const { data, error } = await query;
+    
+    if (error) throw error;
+    
+    return data && data.length > 0;
+  } catch (error) {
+    console.error('Error checking artwork number:', error);
+    throw error;
+  }
+};
+
 // Get all artworks
 export const getAllArtworks = async () => {
   try {

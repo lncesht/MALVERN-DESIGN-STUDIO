@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { addArtwork, updateArtwork } from '../../services/artworkService';
+import { addArtwork, updateArtwork, checkArtworkNumberExists } from '../../services/artworkService';
 import { uploadImage, deleteImage, validateImageFile } from '../../services/storageService';
 import toast from 'react-hot-toast';
 
@@ -126,6 +126,25 @@ const ArtworkFormSimple = ({ artwork = null, isEdit = false }) => {
     if (!isEdit && !imageFile) {
       toast.error('Please select an image');
       return;
+    }
+
+    // Check for duplicate artwork number
+    if (formData.artworkNumber) {
+      try {
+        const exists = await checkArtworkNumberExists(
+          parseInt(formData.artworkNumber),
+          isEdit ? artwork.id : null
+        );
+        
+        if (exists) {
+          toast.error(`Artwork #${formData.artworkNumber} already exists. Please use a different number.`);
+          return;
+        }
+      } catch (error) {
+        console.error('Error checking artwork number:', error);
+        toast.error('Failed to validate artwork number. Please try again.');
+        return;
+      }
     }
 
     setLoading(true);
@@ -332,7 +351,6 @@ const ArtworkFormSimple = ({ artwork = null, isEdit = false }) => {
             className="w-full px-4 py-2 border border-brown-200 rounded-lg focus:ring-2 focus:ring-brown-500 focus:border-transparent"
           />
           <p className="mt-1 text-sm text-brown-500">
-            Display order (1-15)
           </p>
         </div>
       </div>
