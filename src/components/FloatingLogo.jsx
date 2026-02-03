@@ -38,7 +38,7 @@ const FloatingLogo = () => {
 
   return (
     <div 
-      className={`fixed right-8 bottom-8 z-40 hidden lg:block transition-opacity duration-500 ease-in-out hover:opacity-100 ${
+      className={`fixed right-4 bottom-4 md:right-8 md:bottom-8 z-40 transition-opacity duration-500 ease-in-out hover:opacity-100 ${
         isVisible ? 'opacity-50' : 'opacity-0 pointer-events-none'
       }`}
     >
@@ -46,7 +46,7 @@ const FloatingLogo = () => {
         <img 
           src={`${process.env.PUBLIC_URL}/img/price_logo.png`}
           alt="Price Signature Logo" 
-          className="w-52 h-52 object-contain drop-shadow-lg"
+          className="w-32 h-32 md:w-52 md:h-52 object-contain drop-shadow-lg"
         />
       </div>
     </div>
