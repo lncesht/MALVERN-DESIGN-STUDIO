@@ -1,0 +1,7 @@
+[
+  {
+    "key": "ctrl+shift+p",
+    "command": "git.pull",
+    "when": "!inDebugMode"
+  }
+]
