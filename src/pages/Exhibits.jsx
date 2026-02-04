@@ -55,7 +55,7 @@ const Exhibits = () => {
     setTimeout(() => {
       setSelectedExhibit(null);
       setIsClosing(false);
-    }, 300); // Match animation duration
+    }, 300); 
   };
 
   if (loading) {
