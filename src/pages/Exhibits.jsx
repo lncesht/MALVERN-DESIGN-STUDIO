@@ -3,6 +3,7 @@ import Masonry from 'react-masonry-css';
 import Header from '../components/Header';
 import { getAllExhibits } from '../services/exhibitService';
 import { getExhibitionDate, getTimelineEvents } from '../services/timelineService';
+import OptimizedImage from '../components/OptimizedImage';
 
 const Exhibits = () => {
   const [exhibits, setExhibits] = useState([]);
@@ -243,12 +244,12 @@ const Exhibits = () => {
                 onClick={() => openFullscreen(exhibit)}
               >
                 <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                  <img
+                  <OptimizedImage
                     src={exhibit.image_url || exhibit.imageUrl}
                     alt={`Exhibit ${exhibit.id}`}
-                    className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                    decoding="async"
+                    className="group-hover:scale-105 transition-transform duration-300 rounded-lg"
+                    aspectRatio="auto"
+                    priority={exhibit.id <= 4}
                   />
                 </div>
               </div>
